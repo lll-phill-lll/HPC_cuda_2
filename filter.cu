@@ -1,4 +1,3 @@
-%%writefile hello.cu
 #include <chrono>
 #include <iostream>
 
@@ -170,7 +169,6 @@ int main(int argc, char* argv[]) {
         cudaMalloc((void**) &new_to, sizeof(int) * X * Y);
         cudaMalloc((void**) &new_filter, sizeof(int) * FILTER_SIZE * FILTER_SIZE);
 
-        // copy matrix A and B from host to device memory
         cudaMemcpy(new_from, from, sizeof(int) * X * Y, cudaMemcpyHostToDevice);
         cudaMemcpy(new_filter, filter, sizeof(int) * FILTER_SIZE * FILTER_SIZE, cudaMemcpyHostToDevice);
 
@@ -181,7 +179,6 @@ int main(int argc, char* argv[]) {
 
         cudaMemcpy(to, new_to, sizeof(int) * X * Y, cudaMemcpyDeviceToHost);
         cudaThreadSynchronize();
-        // Insert your code that runs C=A*B on GPU below
         cudaFree(new_from);
         cudaFree(new_to);
         cudaFree(new_filter);
